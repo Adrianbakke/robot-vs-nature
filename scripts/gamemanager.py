@@ -124,18 +124,18 @@ class GameManager:
                 self.robot_on_ground = True 
                 self.jump = False
 
-        if self.xpos_background % 30 == 0 and self.robot_on_ground:
-            self.counter_for_img_switch = self.counter_for_img_switch + 1
-            if self.counter_for_img_switch > 3:
-                self.counter_for_img_switch = 0
-        if not self.robot_on_ground:
-            self.counter_for_img_switch = 4
+        # if self.xpos_background % 30 == 0 and self.robot_on_ground:
+        #     self.counter_for_img_switch = self.counter_for_img_switch + 1
+        #     if self.counter_for_img_switch > 3:
+        #         self.counter_for_img_switch = 0
+        # if not self.robot_on_ground:
+        #     self.counter_for_img_switch = 4
 
-        jumperman.img = pygame.image.load(self.img_robot[self.counter_for_img_switch]).convert()
-        jumperman.img.set_colorkey(self.WHITE)
+        # jumperman.img = pygame.image.load(self.img_robot[self.counter_for_img_switch]).convert()
+        # jumperman.img.set_colorkey(self.WHITE)
         jumperman.y_pos = 550 - self.jump_height
 
-        jumperman.display() 
+        jumperman.display(self.xpos_background, self.robot_on_ground) 
 
     def sheep_holder(self):
         score = self.start_score/10000000000
