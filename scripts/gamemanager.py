@@ -8,12 +8,13 @@ from robot import Robot
 class GameManager:
 
     def __init__(self):
+        pygame.mixer.music.load("cute.mp3")
         self.screen_width = 1200
         self.screen_height = 800
         self.screen_size = (self.screen_width,self.screen_height)
         self.screen = pygame.display.set_mode(self.screen_size)
-        self.background_image = pygame.image.load("game-background.jpg")
-        self.background_image = pygame.transform.scale(self.background_image, self.screen_size)
+        background_image = pygame.image.load("game-background.jpg").convert_alpha()
+        self.background_image = pygame.transform.scale(background_image, self.screen_size)
         self.xpos_background = 0
         self.jump = False
         self.jump_height = 0
@@ -22,7 +23,7 @@ class GameManager:
         self.start_score = 0
         self.sheeps = []
         self.BLACK = (0,0,0)
-        self.speed = 15
+        self.speed = 5
         self.number_of_sheeps = 0
         self.img_robot = ["Robot_1.png", "Robot_3.png",              "Robot_2.png", "Robot_3.png",              "Robot_4.png"]
         self.img_sheep = ["sheep_white.png", 
@@ -34,8 +35,8 @@ class GameManager:
         self.myfont = pygame.font.SysFont('Comic Sans MS', 30)
         self.myfont_menu = pygame.font.SysFont('Comic Sans MS', 72)
         self.myfont_menu2 = pygame.font.SysFont('Comic Sans MS', 80)
-        self.height_advancement = 25
-        self.gravity = 50/10
+        self.height_advancement = 12.5
+        self.gravity = 3.5
         self.height = (self.jump_height + 25) * 0.9
         self.get_robot_on_ground = False
         self.robot_on_ground = True
@@ -119,7 +120,7 @@ class GameManager:
             self.jump_height = self.jump_height + self.height_advancement
         
             if self.jump_height < 0:
-                self.height_advancement = 25
+                self.height_advancement = 12.5
                 self.jump_height = 0
                 self.robot_on_ground = True 
                 self.jump = False
@@ -201,12 +202,11 @@ class GameManager:
     def background_logic(self):
         self.screen.blit(self.background_image, (self.xpos_background,0))
         self.screen.blit(self.background_image, (1200+self.xpos_background,0))
-        if abs(self.xpos_background) == self.screen_width:
+        if abs(self.xpos_background) >= self.screen_width:
             self.xpos_background = 0
-        self.xpos_background = self.xpos_background-5
+        self.xpos_background = self.xpos_background-1
 
     def game(self):
-        pygame.mixer.music.load("cute.mp3")
         pygame.mixer.music.play(-1)
         while not self.done:
             for event in pygame.event.get():
@@ -244,7 +244,7 @@ class GameManager:
         white = (255,255,255)
         color_change = False
 
-        background_image = pygame.image.load("robot_vs_nature.png")
+        background_image = pygame.image.load("robot_vs_nature.png").convert_alpha()
         width = 150
         while intro:
             for event in pygame.event.get():

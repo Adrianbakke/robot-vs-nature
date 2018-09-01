@@ -9,13 +9,13 @@ class Robot:
         self.screen = screen
         self.WHITE = (255, 255, 255)
         self.counter_for_img_switch = 0
-        img1 = pygame.image.load("Robot_1.png")
+        img1 = pygame.image.load("Robot_1.png").convert()
         img1.set_colorkey(self.WHITE)
-        img2 = pygame.image.load("Robot_2.png")
+        img2 = pygame.image.load("Robot_2.png").convert() 
         img2.set_colorkey(self.WHITE)
-        img3 = pygame.image.load("Robot_3.png")
+        img3 = pygame.image.load("Robot_3.png").convert()
         img3.set_colorkey(self.WHITE)
-        img4 = pygame.image.load("Robot_4.png")
+        img4 = pygame.image.load("Robot_4.png").convert()
         img4.set_colorkey(self.WHITE)
         self.images = [img1, img3, img2, img3, img4]
     

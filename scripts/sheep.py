@@ -11,7 +11,7 @@ class Sheep:
         self.GREY = (163, 163, 163)
         self.screen = screen
         self.red_sheep = False
-        self.sheep_img = pygame.image.load("sheep_white.png")
+        self.sheep_img = pygame.image.load("sheep_white.png").convert()
         self.sheep_img.set_colorkey(self.GREY)
         self.rand1 = numpy.random.randint(-25,25)
         self.rand2 = numpy.random.randint(-25,25)
