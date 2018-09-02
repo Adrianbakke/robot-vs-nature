@@ -9,6 +9,7 @@ class GameManager:
 
     def __init__(self):
         pygame.mixer.music.load("aud/cute.mp3")
+        
         self.screen_width = 1200
         self.screen_height = 800
         self.screen_size = (self.screen_width,self.screen_height)
@@ -23,7 +24,7 @@ class GameManager:
         self.start_score = 0
         self.sheeps = []
         self.BLACK = (0,0,0)
-        self.speed = 5
+        self.speed = 15
         self.number_of_sheeps = 0
         self.img_robot = ["img/Robot_1.png", "img/Robot_3.png", "img/Robot_2.png", "img/Robot_3.png", "img/Robot_4.png"]
         self.img_sheep = ["img/sheep_white.png", 
@@ -35,8 +36,8 @@ class GameManager:
         self.myfont = pygame.font.SysFont('Comic Sans MS', 30)
         self.myfont_menu = pygame.font.SysFont('Comic Sans MS', 72)
         self.myfont_menu2 = pygame.font.SysFont('Comic Sans MS', 80)
-        self.height_advancement = 12.5
-        self.gravity = 3.5
+        self.height_advancement = 25
+        self.gravity = 5
         self.height = (self.jump_height + 25) * 0.9
         self.get_robot_on_ground = False
         self.robot_on_ground = True
@@ -120,7 +121,7 @@ class GameManager:
             self.jump_height = self.jump_height + self.height_advancement
         
             if self.jump_height < 0:
-                self.height_advancement = 12.5
+                self.height_advancement = 25
                 self.jump_height = 0
                 self.robot_on_ground = True 
                 self.jump = False
@@ -204,15 +205,16 @@ class GameManager:
         self.screen.blit(self.background_image, (1200+self.xpos_background,0))
         if abs(self.xpos_background) >= self.screen_width:
             self.xpos_background = 0
-        self.xpos_background = self.xpos_background-1
+        self.xpos_background = self.xpos_background-5
 
     def game(self):
+        clock = pygame.time.Clock()
         pygame.mixer.music.play(-1)
         while not self.done:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.done = True
-            
+
             keys = pygame.key.get_pressed()
             if keys[pygame.K_s]:
                     self.slow = True
@@ -232,6 +234,9 @@ class GameManager:
             if self.start:
                 time.sleep(2)
                 self.start = False
+
+            clock.tick(60)
+            #print(clock.tick(30))
 
     def cursor_over_object(self, x_pos, y_pos, width, height):
         return pygame.mouse.get_pos()[0] >= x_pos and \
