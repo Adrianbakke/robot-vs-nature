@@ -8,12 +8,12 @@ from robot import Robot
 class GameManager:
 
     def __init__(self):
-        pygame.mixer.music.load("cute.mp3")
+        pygame.mixer.music.load("aud/cute.mp3")
         self.screen_width = 1200
         self.screen_height = 800
         self.screen_size = (self.screen_width,self.screen_height)
         self.screen = pygame.display.set_mode(self.screen_size)
-        background_image = pygame.image.load("game-background.jpg").convert_alpha()
+        background_image = pygame.image.load("img/game-background.jpg").convert_alpha()
         self.background_image = pygame.transform.scale(background_image, self.screen_size)
         self.xpos_background = 0
         self.jump = False
@@ -25,9 +25,9 @@ class GameManager:
         self.BLACK = (0,0,0)
         self.speed = 5
         self.number_of_sheeps = 0
-        self.img_robot = ["Robot_1.png", "Robot_3.png",              "Robot_2.png", "Robot_3.png",              "Robot_4.png"]
-        self.img_sheep = ["sheep_white.png", 
-                          "sheep_red.png"]
+        self.img_robot = ["img/Robot_1.png", "img/Robot_3.png", "img/Robot_2.png", "img/Robot_3.png", "img/Robot_4.png"]
+        self.img_sheep = ["img/sheep_white.png", 
+                          "img/sheep_red.png"]
         self.GREY = (163, 163, 163)
         self.counter_for_img_switch = 0    
         self.start = True
@@ -48,9 +48,9 @@ class GameManager:
         self.start = True
         self.red_sheep = False
         self.red_sheep_start_pos = 0
-        self.sound_effect_jump = pygame.mixer.Sound("jump2.wav")
+        self.sound_effect_jump = pygame.mixer.Sound("aud/jump2.wav")
         self.sound_effect_jump.set_volume(0.2)
-        self.sound_effect_sheep = pygame.mixer.Sound("sheep.wav")
+        self.sound_effect_sheep = pygame.mixer.Sound("aud/sheep.wav")
         self.sound_effect_sheep.set_volume(0.05)
         self.WHITE = (255, 255, 255)
     
@@ -66,12 +66,12 @@ class GameManager:
                 sheep_character.hit = True
                 self.liv = self.liv - 1
                 sheep_character.red_sheep = True
-                sheep_character.sheep_img = pygame.image.load("sheep_red.png").convert()
+                sheep_character.sheep_img = pygame.image.load("img/sheep_red.png").convert()
                 sheep_character.sheep_img.set_colorkey(self.GREY)
         
         if sheep_character.red_sheep and sheep_character.x_pos < 10:
             sheep_character.red_sheep = False
-            sheep_character.sheep_img = pygame.image.load("sheep_white.png").convert()
+            sheep_character.sheep_img = pygame.image.load("img/sheep_white.png").convert()
             sheep_character.sheep_img.set_colorkey(self.GREY)
 
         if player_character.left_side() > sheep_character.right_side():
@@ -244,7 +244,7 @@ class GameManager:
         white = (255,255,255)
         color_change = False
 
-        background_image = pygame.image.load("robot_vs_nature.png").convert_alpha()
+        background_image = pygame.image.load("img/robot_vs_nature.png").convert_alpha()
         width = 150
         while intro:
             for event in pygame.event.get():
