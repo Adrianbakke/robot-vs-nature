@@ -37,3 +37,4 @@ class Sheep:
 
     def rad_end(self):
         return self.x_pos + self.width + 300
+        

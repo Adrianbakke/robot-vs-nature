@@ -6,10 +6,8 @@ from robot import Robot
 
 
 class GameManager:
-
     def __init__(self):
         pygame.mixer.music.load("aud/cute.mp3")
-        
         self.screen_width = 1200
         self.screen_height = 800
         self.screen_size = (self.screen_width,self.screen_height)
@@ -78,7 +76,6 @@ class GameManager:
         if player_character.left_side() > sheep_character.right_side():
             sheep_character.hit = False
 
-
     def init_top_score(self, new_top_score=False, top_score=0):
         if new_top_score:
             top_score_file = open("top_score.txt", 'w')
@@ -126,15 +123,6 @@ class GameManager:
                 self.robot_on_ground = True 
                 self.jump = False
 
-        # if self.xpos_background % 30 == 0 and self.robot_on_ground:
-        #     self.counter_for_img_switch = self.counter_for_img_switch + 1
-        #     if self.counter_for_img_switch > 3:
-        #         self.counter_for_img_switch = 0
-        # if not self.robot_on_ground:
-        #     self.counter_for_img_switch = 4
-
-        # jumperman.img = pygame.image.load(self.img_robot[self.counter_for_img_switch]).convert()
-        # jumperman.img.set_colorkey(self.WHITE)
         jumperman.y_pos = 550 - self.jump_height
 
         jumperman.display(self.xpos_background, self.robot_on_ground) 
@@ -236,7 +224,6 @@ class GameManager:
                 self.start = False
 
             clock.tick(60)
-            #print(clock.tick(30))
 
     def cursor_over_object(self, x_pos, y_pos, width, height):
         return pygame.mouse.get_pos()[0] >= x_pos and \
@@ -254,9 +241,7 @@ class GameManager:
         while intro:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    intro =  False
-                    
-            
+                    intro =  False                
             
             self.screen.blit(background_image, (0,0))
             if color_change: 
@@ -265,7 +250,6 @@ class GameManager:
             else:
                 text =  self.myfont_menu.render('PLAY', False, (0, 0, 0))
                 text_width, text_height = self.myfont_menu2.size("PLAY")
-
             
             self.screen.blit(text, (width,
                              self.screen_height/2))

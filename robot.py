@@ -44,5 +44,3 @@ class Robot:
 
         image = self.images[self.counter_for_img_switch]
         return image
-
-
