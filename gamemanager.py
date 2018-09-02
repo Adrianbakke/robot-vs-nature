@@ -132,7 +132,6 @@ class GameManager:
             len(self.sheeps) == 0 or round(score) > (100*self.number_of_sheeps) + 800:            
                 self.number_of_sheeps = self.number_of_sheeps + 1
                 
-
                 if round(score) > 810:
                     self.sheeps.append(["sheep_%d" % (self.number_of_sheeps)])
                     self.sheeps[self.number_of_sheeps-1] = Sheep(self.screen,800)
@@ -232,10 +231,6 @@ class GameManager:
                 self.number_of_sheeps = 0
                 self.sheeps = []
                 self.speed = 30
-
-
-
-            
 
             self.background_logic()
             self.jumperman(self.jm)
