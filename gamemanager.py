@@ -4,10 +4,9 @@ import numpy
 from sheep import Sheep
 from robot import Robot
 
-
 class GameManager:
     def __init__(self):
-        pygame.mixer.music.load("aud/cute.mp3")
+        pygame.mixer.music.load("aud/Around the World.mp3")
         self.screen_width = 1200
         self.screen_height = 800
         self.screen_size = (self.screen_width,self.screen_height)
@@ -17,7 +16,7 @@ class GameManager:
         self.xpos_background = 0
         self.jump = False
         self.jump_height = 0
-        self.liv = 3
+        self.liv = 99999
         self.lost_life = False
         self.start_score = 0
         self.sheeps = []
@@ -128,13 +127,20 @@ class GameManager:
         jumperman.display(self.xpos_background, self.robot_on_ground) 
 
     def sheep_holder(self):
-        score = self.start_score/10000000000
-        if  round(score) > (100*self.number_of_sheeps) or \
-            len(self.sheeps) == 0:            
+        score = self.start_score/10000000000 
+        if  round(score) > (100*self.number_of_sheeps) and round(score) <= 800 or \
+            len(self.sheeps) == 0 or round(score) > (100*self.number_of_sheeps) + 800:            
                 self.number_of_sheeps = self.number_of_sheeps + 1
-                self.sheeps.append(["sheep_%d" % (self.number_of_sheeps)])
-                self.sheeps[self.number_of_sheeps-1] = Sheep(self.screen)
-                self.sound_effect_sheep.play()
+                
+
+                if round(score) > 810:
+                    self.sheeps.append(["sheep_%d" % (self.number_of_sheeps)])
+                    self.sheeps[self.number_of_sheeps-1] = Sheep(self.screen,800)
+                    self.sound_effect_sheep.play()
+                else:
+                    self.sheeps.append(["sheep_%d" % (self.number_of_sheeps)])
+                    self.sheeps[self.number_of_sheeps-1] = Sheep(self.screen, 300)
+                    self.sound_effect_sheep.play()
 
         return self.sheeps
 
@@ -144,7 +150,7 @@ class GameManager:
             random_number = numpy.random.randint(-10,10)
             
             if sheep.x_pos <= 0:
-                sheep.x_pos = 2800 + (random_number * 100)
+                sheep.x_pos = 2500 + sheep.radius + (random_number * 100)
 
             else:  
                 if sheep.x_pos >= self.sheeps[self.this_sheep].rad_start() \
@@ -169,7 +175,7 @@ class GameManager:
     def life(self):
         score = self.start_score/10000000000
         if self.liv == 0:
-            self.liv = 3
+            self.liv =9999999
             self.number_of_sheeps = 0
             self.this_sheep = 0
             self.sheeps = []
@@ -181,12 +187,18 @@ class GameManager:
     def text(self):
         score = self.start_score/10000000000
         life = self.myfont.render('liv: %d' % (self.liv), False, (0, 0, 0))
-        score = self.myfont.render('score: %d' % (score), False, (0, 0, 0))
+        score_text = self.myfont.render('score: %d' % (score), False, (0, 0, 0))
         top_score_text = self.myfont.render('top-score: %d' % (self.top_score), False, (0, 0, 0))
     
         self.screen.blit(life,(self.screen_width/2,50))
-        self.screen.blit(score,(self.screen_width/2,70))
+        self.screen.blit(score_text,(self.screen_width/2,70))
         self.screen.blit(top_score_text,(self.screen_width/2,90))
+
+        if round(score) > 780 and round(score) < 805:
+                text =  self.myfont_menu2.render('GET READY', False, (255, 0, 0))
+                self.screen.blit(text, (self.screen_width/2 - 60,
+                             self.screen_height/2 - 50))
+                print('text')
 
     def background_logic(self):
         self.screen.blit(self.background_image, (self.xpos_background,0))
@@ -198,6 +210,8 @@ class GameManager:
     def game(self):
         clock = pygame.time.Clock()
         pygame.mixer.music.play(-1)
+        score = self.start_score/10000000000
+        
         while not self.done:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -211,6 +225,18 @@ class GameManager:
                 time.sleep(0.02)
             
             self.start_score = time.time() + self.start_score
+            score = self.start_score/10000000000
+
+            if round(score) == 810:
+                self.this_sheep = 0
+                self.number_of_sheeps = 0
+                self.sheeps = []
+                self.speed = 30
+
+
+
+            
+
             self.background_logic()
             self.jumperman(self.jm)
             self.sheeps_on_screen(self.jm)

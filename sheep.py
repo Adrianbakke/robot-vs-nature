@@ -2,8 +2,9 @@ import pygame
 import numpy
 
 class Sheep:
-    def __init__(self,screen):
-        self.x_pos = 1800
+    def __init__(self,screen,radius):
+        self.radius = radius
+        self.x_pos = 1500 + self.radius
         self.y_pos = 583
         self.width = 130
         self.height = 95
@@ -33,8 +34,7 @@ class Sheep:
         return self.x_pos
 
     def rad_start(self):
-        return self.x_pos - 300
+        return self.x_pos - self.radius
 
     def rad_end(self):
-        return self.x_pos + self.width + 300
-        
+        return self.x_pos + self.width + self.radius
