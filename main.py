@@ -3,7 +3,10 @@ import pygame
 
 pygame.init()
 
-gm = GameManager()
 
-gm.start_screen()
-gm.game()
+if __name__ == "__main__":
+    print("Creating game object...")
+    gm = GameManager()
+    print("Done. Starting run method")
+    gm.start_screen()
+    gm.game()
