@@ -7,8 +7,6 @@ class Robot:
         self.width = 90
         self.height = 135
         self.screen = screen
-        self.WHITE = (255, 255, 255)
-        self.counter_for_img_switch = 0
     
     def display(self, image):
         self.screen.blit(image,(self.x_pos, self.y_pos))

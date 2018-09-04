@@ -294,7 +294,7 @@ class GameManager:
 
         if (score % 100) == 0 and self.let_advancement_pass and score > 0:
             self.speed += 2
-            if self.img_rotation_tempo >= 1:
+            if self.img_rotation_tempo > 3:
                 self.img_rotation_tempo -= 1
             self.temp_speed_cont = round(score)
             self.let_advancement_pass = False
