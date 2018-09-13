@@ -11,13 +11,14 @@ class Sheep:
         self.hit = False
         self.sheep_passed = False
         self.GREY = (163, 163, 163)
+        self.BLUE = (0, 162, 232)
         self.screen = screen
         self.red_sheep = False
         self.rand1 = numpy.random.randint(-25,25)
         self.rand2 = numpy.random.randint(-25,25)
         self.rand3 = numpy.random.randint(-25,25)
-        self.sheep_img = pygame.image.load("img/sheep_white.png").convert()
-        self.sheep_img.set_colorkey(self.GREY)
+        self.sheep_img = pygame.image.load("img/sheep_white3.png").convert()
+        self.sheep_img.set_colorkey(self.BLUE)
        
 
 

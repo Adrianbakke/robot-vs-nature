@@ -24,9 +24,10 @@ class GameManager:
         self.speed = 15
         self.number_of_sheeps = 0
         self.img_robot = ["img/Robot_1.png", "img/Robot_3.png", "img/Robot_2.png", "img/Robot_3.png", "img/Robot_4.png"]
-        self.img_sheep = ["img/sheep_white.png", 
-                          "img/sheep_red.png"]
+        self.img_sheep = ["img/sheep_white3.png", 
+                          "img/sheep_red3.png"]
         self.GREY = (163, 163, 163)
+        self.BLUE = (0, 162, 232)
         self.counter_for_img_switch = 0    
         self.start = True
         self.this_sheep = 0
@@ -85,14 +86,14 @@ class GameManager:
                 sheep_character.sheep_passed = True
                 self.liv = self.liv - 1
                 sheep_character.red_sheep = True
-                sheep_character.sheep_img = pygame.image.load("img/sheep_red.png").convert()
-                sheep_character.sheep_img.set_colorkey(self.GREY)
+                sheep_character.sheep_img = pygame.image.load("img/sheep_red3.png").convert()
+                sheep_character.sheep_img.set_colorkey(self.BLUE)
         
         elif sheep_character.red_sheep \
              and sheep_character.x_pos < 10:
                 sheep_character.red_sheep = False
-                sheep_character.sheep_img = pygame.image.load("img/sheep_white.png").convert()
-                sheep_character.sheep_img.set_colorkey(self.GREY)
+                sheep_character.sheep_img = pygame.image.load("img/sheep_white3.png").convert()
+                sheep_character.sheep_img.set_colorkey(self.BLUE)
 
         elif player_character.left_side() \
              > sheep_character.right_side() \
@@ -255,6 +256,7 @@ class GameManager:
             self.start_score = 0
             self.sheep_passed_counter = 0
             self.speed = 15
+            self.img_rotation_tempo = 8
             pygame.mixer.music.rewind()
 
     def text(self):
@@ -293,8 +295,8 @@ class GameManager:
                 self.speed = 35
 
         if (score % 100) == 0 and self.let_advancement_pass and score > 0:
-            self.speed += 2
-            if self.img_rotation_tempo > 3:
+            self.speed += 1
+            if self.img_rotation_tempo > 4:
                 self.img_rotation_tempo -= 1
             self.temp_speed_cont = round(score)
             self.let_advancement_pass = False
